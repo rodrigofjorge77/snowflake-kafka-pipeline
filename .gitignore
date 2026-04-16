@@ -31,3 +31,14 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# ============================================================
+# Arquivos de configuração com credenciais — NUNCA subir
+# ============================================================
+src/main/resources/application-dev.properties
+src/main/resources/application-prod.properties
+
+# IntelliJ — arquivos locais de workspace que não devem ser compartilhados
+.idea/workspace.xml
+.idea/tasks.xml
+*.iml
