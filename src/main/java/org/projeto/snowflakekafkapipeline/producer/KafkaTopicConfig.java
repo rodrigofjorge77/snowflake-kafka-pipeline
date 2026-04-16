@@ -1,4 +1,4 @@
-package org.projeto.snowflakekafkapipeline.config;
+package org.projeto.snowflakekafkapipeline.producer;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Value;
