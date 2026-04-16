@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SnowflakeKafkaPipelineApplication {
+public class SnowflakeKafkaPipelineApplication { //teste
 
     public static void main(String[] args) {
         SpringApplication.run(SnowflakeKafkaPipelineApplication.class, args);
