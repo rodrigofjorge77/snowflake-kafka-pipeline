@@ -54,7 +54,7 @@
         <dependency>
             <groupId>net.snowflake</groupId>
             <artifactId>snowflake-jdbc</artifactId>
-            <version>3.14.4</version>
+            <version>3.15.0</version>
         </dependency>
 
         <!-- Jackson — serialização dos dados para JSON antes de enviar ao Kafka -->
@@ -84,6 +84,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 
