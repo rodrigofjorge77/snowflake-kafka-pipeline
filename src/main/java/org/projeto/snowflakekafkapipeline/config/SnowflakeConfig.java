@@ -35,6 +35,9 @@ public class SnowflakeConfig {
             extraProps.setProperty("schema", props.getSchema());
             extraProps.setProperty("warehouse", props.getWarehouse());
             extraProps.setProperty("role", props.getRole());
+
+            // Desativa o Apache Arrow — evita conflito com Java 17 sem precisar de --add-opens
+            extraProps.setProperty("JDBC_QUERY_RESULT_FORMAT", "JSON");
             dataSource.setConnectionProperties(extraProps);
 
             log.info("✅ Conexão com Snowflake configurada com sucesso.");
