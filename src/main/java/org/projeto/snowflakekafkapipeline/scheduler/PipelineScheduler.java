@@ -17,18 +17,16 @@ public class PipelineScheduler {
 
     private final ExtractionService extractionService;
 
-    // Lê os nomes das tabelas do application.properties como um Map
-    // Chave = identificador (tabela1, tabela2...), Valor = nome real no Snowflake
-    @Value("#{${pipeline.tables.tabela1:'ORDERS'}}")
+    // Leitura simples das propriedades com ${...} sem SpEL
+    @Value("${pipeline.tables.tabela1}")
     private String tabelaOrders;
 
-    @Value("#{${pipeline.tables.tabela2:'CUSTOMER'}}")
+    @Value("${pipeline.tables.tabela2}")
     private String tabelaCustomer;
 
-    @Value("#{${pipeline.tables.tabela3:'SUPPLIER'}}")
+    @Value("${pipeline.tables.tabela3}")
     private String tabelaSupplier;
 
-    // Lê os nomes dos tópicos do application.properties
     @Value("${pipeline.topics.tabela1}")
     private String topicOrders;
 
@@ -38,28 +36,23 @@ public class PipelineScheduler {
     @Value("${pipeline.topics.tabela3}")
     private String topicSupplier;
 
-    // fixedDelayString lê o intervalo do properties em milissegundos
-    // fixedDelay = espera o ciclo anterior terminar antes de iniciar o próximo
-    // Isso evita execuções sobrepostas caso a extração demore mais que 10 segundos
     @Scheduled(fixedDelayString = "${pipeline.scheduler.interval}")
     public void executePipeline() {
         log.info("⏰ [{}] Iniciando ciclo de extração...", LocalDateTime.now());
 
-        // Monta um mapa relacionando cada tabela ao seu tópico Kafka
-        // Assim fica fácil adicionar novas tabelas: só incluir mais uma entrada no mapa
+        // Mapa relacionando cada tabela ao seu tópico Kafka
         Map<String, String> tableTopicMap = Map.of(
                 tabelaOrders,   topicOrders,
                 tabelaCustomer, topicCustomer,
                 tabelaSupplier, topicSupplier
         );
 
-        // Itera sobre cada par tabela → tópico e executa a extração
+        // Itera sobre cada par tabela → tópico
+        // Captura erro por tabela para não interromper as demais em caso de falha
         tableTopicMap.forEach((tableName, topic) -> {
             try {
                 extractionService.extractAndSend(tableName, topic);
             } catch (Exception e) {
-                // Captura erro por tabela para não interromper as demais extrações
-                // Se ORDERS falhar, CUSTOMER e SUPPLIER continuam sendo processadas
                 log.error("❌ Erro ao processar tabela {}: {}", tableName, e.getMessage());
             }
         });

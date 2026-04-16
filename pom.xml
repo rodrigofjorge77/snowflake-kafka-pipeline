@@ -44,12 +44,6 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
-        <!-- Spring Data JPA — abstração de acesso a banco de dados -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
         <!-- Snowflake JDBC Driver — driver oficial para conectar ao Snowflake -->
         <dependency>
             <groupId>net.snowflake</groupId>
@@ -70,14 +64,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- DevTools — reinicia a aplicação automaticamente ao salvar (só em DEV) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-
         <!-- Testes -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,6 +71,11 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Spring JDBC — fornece o JdbcTemplate para executar queries diretamente -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
 
     </dependencies>
 
