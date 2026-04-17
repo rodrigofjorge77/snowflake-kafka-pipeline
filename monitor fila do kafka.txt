@@ -16,4 +16,11 @@ docker exec -it 5e830926b570 \
   kafka-console-consumer \
   --bootstrap-server localhost:9092 \
   --topic topic-supplier \
-  --from-beginning  
+  --from-beginning
+
+
+      docker exec -it 5e830926b570 \
+    kafka-console-consumer \
+    --bootstrap-server localhost:9092 \
+    --topic topic-part \
+    --from-beginning
