@@ -19,6 +19,9 @@ public class KafkaTopicConfig {
     @Value("${pipeline.topics.tabela3}")
     private String topicTabela3;
 
+    @Value("${pipeline.topics.tabela4}")
+    private String topicTabela4;
+
     @Bean
     public NewTopic topicTabela1() {
         return TopicBuilder
@@ -41,6 +44,15 @@ public class KafkaTopicConfig {
     public NewTopic topicTabela3() {
         return TopicBuilder
                 .name(topicTabela3)
+                .partitions(1)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic topicTabela4() {
+        return TopicBuilder
+                .name(topicTabela4)
                 .partitions(1)
                 .replicas(1)
                 .build();

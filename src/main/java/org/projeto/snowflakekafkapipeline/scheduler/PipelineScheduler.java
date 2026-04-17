@@ -27,6 +27,9 @@ public class PipelineScheduler {
     @Value("${pipeline.tables.tabela3}")
     private String tabelaSupplier;
 
+    @Value("${pipeline.tables.tabela4}")
+    private String tabelaPart;
+
     @Value("${pipeline.topics.tabela1}")
     private String topicOrders;
 
@@ -36,6 +39,9 @@ public class PipelineScheduler {
     @Value("${pipeline.topics.tabela3}")
     private String topicSupplier;
 
+    @Value("${pipeline.topics.tabela4}")
+    private String topicPart;
+
     @Scheduled(fixedDelayString = "${pipeline.scheduler.interval}")
     public void executePipeline() {
         log.info("⏰ [{}] Iniciando ciclo de extração...", LocalDateTime.now());
@@ -44,7 +50,8 @@ public class PipelineScheduler {
         Map<String, String> tableTopicMap = Map.of(
                 tabelaOrders,   topicOrders,
                 tabelaCustomer, topicCustomer,
-                tabelaSupplier, topicSupplier
+                tabelaSupplier, topicSupplier,
+                tabelaPart,     topicPart
         );
 
         // Itera sobre cada par tabela → tópico
